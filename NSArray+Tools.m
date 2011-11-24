@@ -42,7 +42,11 @@
     for (id anObject in self) {
         if ([anObject isMemberOfClass:[NSDictionary class]] || [anObject isKindOfClass:[NSObject class]]) {
             value = [anObject valueForKey:key];
-            if (value) {
+            if ([value isKindOfClass:[NSDictionary class]]) {
+                [resultsList addObject:value];
+            } else if ([value isKindOfClass:[NSArray class]]) {
+                [resultsList addObjectsFromArray:value];
+            } else if ([value isKindOfClass:[NSObject class]]) {
                 [resultsList addObject:value];
             }
         }
